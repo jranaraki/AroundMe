@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ViewController.centralManager(_:didDiscover:advertisementData:rssi:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "distance.value">
+            </PersistentString>
+            <PersistentString
+               value = "people">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.setCounter(value:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "threshold.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
