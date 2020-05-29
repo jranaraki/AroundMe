@@ -57,14 +57,14 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GIa-79-NLw" userLabel="Distance">
                                 <rect key="frame" x="20" y="101" width="335" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance (0-10 m)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSG-9U-ouV">
-                                        <rect key="frame" x="0.0" y="0.0" width="138.5" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance (1-10 m)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSG-9U-ouV">
+                                        <rect key="frame" x="0.0" y="0.0" width="135.5" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="WxI-xA-7Iz">
-                                        <rect key="frame" x="144.5" y="0.0" width="192.5" height="31"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="WxI-xA-7Iz">
+                                        <rect key="frame" x="141.5" y="0.0" width="195.5" height="31"/>
                                         <connections>
                                             <action selector="distanceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="N45-0f-aJx"/>
                                         </connections>
@@ -86,16 +86,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙂" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXG-kY-39d" userLabel="Emoji">
+                                <rect key="frame" x="176" y="596.5" width="23" height="20.5"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="tRB-1e-h6S" firstAttribute="top" secondItem="GIa-79-NLw" secondAttribute="bottom" constant="20" id="114-Cb-9et"/>
                             <constraint firstItem="tRB-1e-h6S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="1vd-Nq-Qur"/>
                             <constraint firstItem="GIa-79-NLw" firstAttribute="top" secondItem="tQW-Lu-kbc" secondAttribute="bottom" constant="20" id="2kg-TY-77G"/>
+                            <constraint firstItem="XXG-kY-39d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3x1-Ug-Y7P"/>
                             <constraint firstItem="R7D-Sy-xcd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6EX-bJ-9wx"/>
                             <constraint firstItem="tQW-Lu-kbc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="9E4-z0-OfS"/>
                             <constraint firstItem="6hy-Ov-y08" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9ft-6d-3uv"/>
                             <constraint firstItem="GIa-79-NLw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="B6n-Zp-ey8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XXG-kY-39d" secondAttribute="bottom" constant="50" id="GaW-jq-Q7I"/>
                             <constraint firstItem="P8H-AP-2PO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H6C-PV-8XM"/>
                             <constraint firstItem="GIa-79-NLw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HkQ-vr-m3W"/>
                             <constraint firstItem="R7D-Sy-xcd" firstAttribute="top" secondItem="P8H-AP-2PO" secondAttribute="bottom" constant="20" id="KPa-Do-t7v"/>
@@ -119,6 +127,7 @@
                         <outlet property="activityIcon" destination="P8H-AP-2PO" id="cNW-Mc-xgF"/>
                         <outlet property="counter" destination="R7D-Sy-xcd" id="7yi-mC-Ptt"/>
                         <outlet property="distance" destination="WxI-xA-7Iz" id="38a-le-qZ4"/>
+                        <outlet property="emoji" destination="XXG-kY-39d" id="qvd-xa-J8m"/>
                         <outlet property="status" destination="ft5-qF-cgS" id="VQm-ji-bSy"/>
                         <outlet property="threshold" destination="LJ5-z0-YNH" id="JeQ-Wp-XiD"/>
                     </connections>

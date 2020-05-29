@@ -6,10 +6,10 @@
          contextName = "ViewController.centralManager(_:didDiscover:advertisementData:rssi:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "distance.value">
+               value = "print(advertisementData[CBAdvertisementDataServiceUUIDsKey]!)">
             </PersistentString>
             <PersistentString
-               value = "people">
+               value = "print(tooltip!)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

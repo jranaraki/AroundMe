@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var counter: UILabel!
     
+    @IBOutlet weak var emoji: UILabel!
+    
     var centralManager: CBCentralManager!
     
     var bluetoothStatus = false
@@ -44,8 +46,10 @@ class ViewController: UIViewController {
         status.text = value
         if value == "Dangerous!" {
             status.textColor = UIColor.red
+            setEmoji(value: "🚶 + 😷 + 🧤")
         } else {
             status.textColor = UIColor.green
+            setEmoji(value: "🙂")
         }
     }
     
@@ -53,10 +57,15 @@ class ViewController: UIViewController {
         counter.text = String(value)
     }
     
+    func setEmoji(value:String) {
+        emoji.text = value
+    }
+    
     func initiate()  {
         setStatus(value: "Safe")
         setCounter(value: 0)
         people = 0
+        setEmoji(value: "🙂")
     }
     
     func vibrate() {
@@ -106,7 +115,7 @@ extension ViewController: CBCentralManagerDelegate {
             bluetoothStatus = false
         case .poweredOn:
             bluetoothStatus = true
-            centralManager.scanForPeripherals(withServices: nil)
+            centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : false])
         case .unknown:
             bluetoothStatus = false
         default:
