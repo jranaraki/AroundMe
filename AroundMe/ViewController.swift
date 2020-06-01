@@ -87,23 +87,22 @@ class ViewController: UIViewController {
     func appStatus(){
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
-        
     }
     
     @objc func appMovedToBackground() {
+        removeOldNotifications()
+
         let content = UNMutableNotificationContent()
         content.title = "AroundMe"
         content.body = "The app should be stayed open to function"
         content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: (10*60), repeats: false)
-        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (10*60), repeats: false)
         let uuidString = UUID().uuidString
         let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
         
         // Schedule the request with the system.
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.add(request) { (error) in
+        userNotificationCenter.add(request) { (error) in
             if error != nil {
                 // Handle any errors.
             }
@@ -120,6 +119,10 @@ class ViewController: UIViewController {
         }
     }
     
+    func removeOldNotifications() {
+        userNotificationCenter.removeAllDeliveredNotifications()
+        userNotificationCenter.removeAllPendingNotificationRequests()
+    }
     
     @IBAction func distanceChanged(_ sender: Any) {
         initiate()
