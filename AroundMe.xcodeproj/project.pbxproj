@@ -107,7 +107,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
-				ORGANIZATIONNAME = "Holland Bloorview Kids Rehabilitation Hospital";
+				ORGANIZATIONNAME = "University of Toronto";
 				TargetAttributes = {
 					772E283F24756E90000A9950 = {
 						CreatedOnToolsVersion = 11.4.1;
@@ -304,10 +304,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hollandbloorview.ca.AroundMe;
+				PRODUCT_BUNDLE_IDENTIFIER = utoronto.ca.AroundMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -323,10 +323,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hollandbloorview.ca.AroundMe;
+				PRODUCT_BUNDLE_IDENTIFIER = utoronto.ca.AroundMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -32,6 +32,9 @@ class ViewController: UIViewController {
     
     var people = 0
     
+    let userNotificationCenter = UNUserNotificationCenter.current()
+    
+    
     //Getters
     func getDistance() -> Float {
         return Float(distance.value)
@@ -75,9 +78,48 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIcon.isHidden = true
-        initiate()
         UIApplication.shared.isIdleTimerDisabled = true
+        requestNotificationAuthorization()
+        initiate()
+        appStatus()
     }
+    
+    func appStatus(){
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+        
+    }
+    
+    @objc func appMovedToBackground() {
+        let content = UNMutableNotificationContent()
+        content.title = "AroundMe"
+        content.body = "The app should be stayed open to function"
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: (10*60), repeats: false)
+        
+        let uuidString = UUID().uuidString
+        let request = UNNotificationRequest(identifier: uuidString, content: content, trigger: trigger)
+        
+        // Schedule the request with the system.
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                // Handle any errors.
+            }
+        }
+    }
+    
+    func requestNotificationAuthorization() {
+        let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
+        
+        self.userNotificationCenter.requestAuthorization(options: authOptions) { (success, error) in
+            if let error = error {
+                print("Error: ", error)
+            }
+        }
+    }
+    
     
     @IBAction func distanceChanged(_ sender: Any) {
         initiate()
