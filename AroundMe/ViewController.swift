@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     //Setters
     func setStatus(value:String) {
         status.text = value
-        if value == "Dangerous!" {
+        if value == "Unsafe!" {
             status.textColor = UIColor.red
             setEmoji(value: "🚶 + 😷 + 🧤")
         } else {
@@ -185,7 +185,7 @@ extension ViewController: CBCentralManagerDelegate {
         }
         
         if (people >= getThreshold()) {
-            setStatus(value: "Dangerous!")
+            setStatus(value: "Unsafe!")
             vibrate()
             //sleep(2)
         } else {
