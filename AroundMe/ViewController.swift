@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         
     let userLicenseAgreement = "The information included in this application is solely for general use and educational purposes and should not be considered, or used as a substitute for, professional, regulated or technical advice. This application does not constitute the practice of any professional advice and is not a replacement for a qualified professional. In no event shall the University of Toronto, the application developers, its contributors, affiliated institutions, and supporting partners, be liable for damages of any kind in connection with the use, misuse, or reliance upon the information provided in this application."
     
-    let about = "AroundMe " + String(Bundle.main.releaseVersionNumber ?? "1") + "(" + String(Bundle.main.buildVersionNumber ?? "0") + ") is designed (by Javad Rahimipour Anaraki) to continuously monitor surroundings, keep the user aware of higher risk environments, and remind them to wear PPEs.\nFor more info, please visit http://individual.utoronto.ca/jrahimipour"
+    let about = "AroundMe " + String(Bundle.main.releaseVersionNumber ?? "1") + "(" + String(Bundle.main.buildVersionNumber ?? "0") + ") is designed by Javad Rahimipour Anaraki to continuously monitor surroundings, keep the user aware of higher risk environments, and remind them to wear PPEs.\nFor more info, please visit http://individual.utoronto.ca/jrahimipour"
     
     //Getters
     func getDistance() -> Float {
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
             let acceptAction = UIAlertAction(title: "Accept", style: .default) { (action) -> Void in }
             alert.addAction(declineAction)
             alert.addAction(acceptAction)
-            alert.setValue(justifyText(value: userLicenseAgreement), forKey: "attributedMessage")
+            //alert.setValue(justifyText(value: userLicenseAgreement), forKey: "attributedMessage")
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -182,7 +182,7 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "About", message: about, preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "Close", style: .default) { (action) -> Void in }
         alert.addAction(closeAction)
-        alert.setValue(justifyText(value: about), forKey: "attributedMessage")
+        //alert.setValue(justifyText(value: about), forKey: "attributedMessage")
         self.present(alert, animated: true, completion: nil)
     }
 }
