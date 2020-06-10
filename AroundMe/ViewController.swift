@@ -26,6 +26,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var emoji: UILabel!
     
+    @IBOutlet weak var infoButton: UIButton!
+    
     var centralManager: CBCentralManager!
     
     var bluetoothStatus = false
@@ -34,6 +36,11 @@ class ViewController: UIViewController {
     
     let userNotificationCenter = UNUserNotificationCenter.current()
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+    let userLicenseAgreement = "The information included in this application is solely for general use and educational purposes and should not be considered, or used as a substitute for, professional, regulated or technical advice. This application does not constitute the practice of any professional advice and is not a replacement for a qualified professional. In no event shall the University of Toronto, the application developers, its contributors, affiliated institutions, and supporting partners, be liable for damages of any kind in connection with the use, misuse, or reliance upon the information provided in this application."
+    
+    let about = "AroundMe " + String(Bundle.main.releaseVersionNumber ?? "1") + "(" + String(Bundle.main.buildVersionNumber ?? "0") + ") is designed (by Javad Rahimipour Anaraki) to continuously monitor surroundings, keep the user aware of higher risk environments, and remind them to wear PPEs.\nFor more info, please visit http://individual.utoronto.ca/jrahimipour"
     
     //Getters
     func getDistance() -> Float {
@@ -64,13 +71,13 @@ class ViewController: UIViewController {
         emoji.text = value
     }
     
-    func initiate()  {
+    func initiate() {
         setStatus(value: "Safe")
         setCounter(value: 0)
         people = 0
         setEmoji(value: "🙂")
     }
-    
+       
     func vibrate() {
         AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) { }
     }
@@ -84,6 +91,19 @@ class ViewController: UIViewController {
         appStatus()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if(!appDelegate.hasAlreadyLaunched) {
+            appDelegate.sethasAlreadyLaunched()
+            let alert = UIAlertController(title: "License Agreement", message: userLicenseAgreement, preferredStyle: .alert)
+            let declineAction = UIAlertAction(title: "Decline" , style: .destructive) { (action) -> Void in }
+            let acceptAction = UIAlertAction(title: "Accept", style: .default) { (action) -> Void in }
+            alert.addAction(declineAction)
+            alert.addAction(acceptAction)
+            alert.setValue(justifyText(value: userLicenseAgreement), forKey: "attributedMessage")
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     func appStatus(){
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
@@ -91,7 +111,7 @@ class ViewController: UIViewController {
     
     @objc func appMovedToBackground() {
         removeOldNotifications()
-
+        
         let content = UNMutableNotificationContent()
         content.title = "AroundMe"
         content.body = "The app should be stayed open to function"
@@ -124,6 +144,18 @@ class ViewController: UIViewController {
         userNotificationCenter.removeAllPendingNotificationRequests()
     }
     
+    func justifyText(value:String) -> NSAttributedString {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .justified
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .paragraphStyle: paragraphStyle
+        ]
+
+        let attributedQuote = NSAttributedString(string: value, attributes: attributes)
+        return attributedQuote
+    }
+    
     @IBAction func distanceChanged(_ sender: Any) {
         initiate()
     }
@@ -144,6 +176,23 @@ class ViewController: UIViewController {
             activityIcon.isHidden = true
             initiate()
         }
+    }
+    
+    @IBAction func infoTouched(_ sender: Any) {
+        let alert = UIAlertController(title: "About", message: about, preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: "Close", style: .default) { (action) -> Void in }
+        alert.addAction(closeAction)
+        alert.setValue(justifyText(value: about), forKey: "attributedMessage")
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension Bundle {
+    var releaseVersionNumber: String? {
+        return infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+    var buildVersionNumber: String? {
+        return infoDictionary?["CFBundleVersion"] as? String
     }
 }
 

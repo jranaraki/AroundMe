@@ -299,6 +299,7 @@
 				CODE_SIGN_ENTITLEMENTS = AroundMe/AroundMe.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Z57962HZ56;
 				INFOPLIST_FILE = AroundMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,6 +321,7 @@
 				CODE_SIGN_ENTITLEMENTS = AroundMe/AroundMe.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = Y3PK6NY96A;
 				INFOPLIST_FILE = AroundMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

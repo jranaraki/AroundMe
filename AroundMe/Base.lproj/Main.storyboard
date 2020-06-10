@@ -92,6 +92,16 @@
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8G-7x-S6n">
+                                <rect key="frame" x="10" y="624" width="30" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="ℹ️">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="infoTouched:" destination="BYZ-38-t0r" eventType="touchDown" id="KpB-z7-GE3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -115,8 +125,10 @@
                             <constraint firstItem="ft5-qF-cgS" firstAttribute="top" secondItem="tRB-1e-h6S" secondAttribute="bottom" constant="100" id="bau-OX-Nuo"/>
                             <constraint firstItem="tQW-Lu-kbc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="d97-Q0-ggJ"/>
                             <constraint firstItem="tRB-1e-h6S" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hdO-PS-EPy"/>
+                            <constraint firstItem="e8G-7x-S6n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="hgU-TS-8b6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tQW-Lu-kbc" secondAttribute="trailing" constant="20" id="iXO-4c-CIJ"/>
                             <constraint firstItem="P8H-AP-2PO" firstAttribute="top" secondItem="ft5-qF-cgS" secondAttribute="bottom" constant="20" id="l7q-v5-yxY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="e8G-7x-S6n" secondAttribute="bottom" constant="10" id="ltI-EA-qA5"/>
                             <constraint firstItem="tQW-Lu-kbc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tEx-3W-sxp"/>
                             <constraint firstItem="6hy-Ov-y08" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ySQ-Ns-S0d"/>
                         </constraints>
@@ -128,6 +140,7 @@
                         <outlet property="counter" destination="R7D-Sy-xcd" id="7yi-mC-Ptt"/>
                         <outlet property="distance" destination="WxI-xA-7Iz" id="38a-le-qZ4"/>
                         <outlet property="emoji" destination="XXG-kY-39d" id="qvd-xa-J8m"/>
+                        <outlet property="infoButton" destination="e8G-7x-S6n" id="OTZ-FN-xsl"/>
                         <outlet property="status" destination="ft5-qF-cgS" id="VQm-ji-bSy"/>
                         <outlet property="threshold" destination="LJ5-z0-YNH" id="JeQ-Wp-XiD"/>
                     </connections>
