@@ -6,7 +6,7 @@ the same environment.
 
 ## Requirement
 * Xcode 11.5
-* Works on both iPhone and iPad
+* Either iPhone and iPad
 
 ## Limitation
 * Only tested on iOS 13.5.1 and iPhone 8
