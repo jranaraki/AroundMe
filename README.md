@@ -9,4 +9,4 @@ the same environment.
 * Works on both iPhone and iPad
 
 ## Limitation
-* Only tested on iOS 13.5.1
+* Only tested on iOS 13.5.1 and iPhone 8
