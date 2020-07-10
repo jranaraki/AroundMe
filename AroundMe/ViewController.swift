@@ -19,14 +19,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var threshold: UISlider!
     
     @IBOutlet weak var status: UILabel!
-    
-    @IBOutlet weak var activityIcon: UIActivityIndicatorView!
-    
+        
     @IBOutlet weak var counter: UILabel!
     
-    @IBOutlet weak var emoji: UILabel!
+    @IBOutlet weak var infoButton: UIImageView!
+        
+    @IBOutlet weak var distanceLabel: UILabel!
     
-    @IBOutlet weak var infoButton: UIButton!
+    @IBOutlet weak var circleSafe: UIView!
+    
+    @IBOutlet weak var circleCaution: UIView!
+    
+    @IBOutlet weak var thresholdLabel: UILabel!
+        
+    @IBOutlet weak var checkmark: UIImageView!
+    
+    @IBOutlet weak var exclamationmark: UIImageView!
     
     var centralManager: CBCentralManager!
     
@@ -40,7 +48,7 @@ class ViewController: UIViewController {
         
     let userLicenseAgreement = "The information included in this application is solely for general use and educational purposes and should not be considered, or used as a substitute for, professional, regulated or technical advice. This application does not constitute the practice of any professional advice and is not a replacement for a qualified professional. In no event shall the University of Toronto, the application developers, its contributors, affiliated institutions, and supporting partners, be liable for damages of any kind in connection with the use, misuse, or reliance upon the information provided in this application."
     
-    let about = "AroundMe " + String(Bundle.main.releaseVersionNumber ?? "1") + "(" + String(Bundle.main.buildVersionNumber ?? "0") + ") is designed by Javad Rahimipour Anaraki to continuously monitor surroundings, keep the user aware of higher risk environments, and remind them to wear PPEs.\nFor more info, please visit http://individual.utoronto.ca/jrahimipour"
+    let about = "AroundMe " + String(Bundle.main.releaseVersionNumber ?? "1") + "(" + String(Bundle.main.buildVersionNumber ?? "0") + ") is implemented by Javad Rahimipour Anaraki, and the UI is desgined by Chu Li, to continuously monitor surroundings, keep the user aware of higher risk environments, and remind them to wear PPEs. For more info visit individual.utoronto.ca/jrahimipour/"
     
     //Getters
     func getDistance() -> Float {
@@ -54,28 +62,28 @@ class ViewController: UIViewController {
     //Setters
     func setStatus(value:String) {
         status.text = value
-        if value == "Unsafe!" {
-            status.textColor = UIColor.red
-            setEmoji(value: "🚶 + 😷 + 🧤")
+        if value == "CAUTION" {
+            circleSafe.isHidden = true
+            checkmark.isHidden = true
+            circleCaution.isHidden = false
+            exclamationmark.isHidden = false
+            
         } else {
-            status.textColor = UIColor.green
-            setEmoji(value: "🙂")
+            circleSafe.isHidden = false
+            checkmark.isHidden = false
+            circleCaution.isHidden = true
+            exclamationmark.isHidden = true
         }
     }
     
-    func setCounter(value:Int){
-        counter.text = String(value)
-    }
-    
-    func setEmoji(value:String) {
-        emoji.text = value
+    func setCounter(){
+        counter.text = "There are \(String(people)) people within \(floor(distance.value)) meters."
     }
     
     func initiate() {
-        setStatus(value: "Safe")
-        setCounter(value: 0)
+        setStatus(value: "SAFE")
         people = 0
-        setEmoji(value: "🙂")
+        setCounter()
     }
        
     func vibrate() {
@@ -84,7 +92,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIcon.isHidden = true
         UIApplication.shared.isIdleTimerDisabled = true
         requestNotificationAuthorization()
         initiate()
@@ -158,27 +165,30 @@ class ViewController: UIViewController {
     
     @IBAction func distanceChanged(_ sender: Any) {
         initiate()
+        self.distanceLabel.text = "\(floor(distance.value)) m"
+        let trackRect = (sender as AnyObject).trackRect(forBounds: (sender as AnyObject).frame)
+        let thumbRect = (sender as AnyObject).thumbRect(forBounds: (sender as AnyObject).bounds, trackRect: trackRect, value: (sender as AnyObject).value)
+        self.distanceLabel.center = CGPoint(x: thumbRect.midX + 35, y: self.distanceLabel.center.y)
     }
     
     @IBAction func thresholdChanged(_ sender: Any) {
         initiate()
-    }
+        self.thresholdLabel.text = "\(Int(floor(threshold.value))) people"
+        let trackRect = (sender as AnyObject).trackRect(forBounds: (sender as AnyObject).frame)
+        let thumbRect = (sender as AnyObject).thumbRect(forBounds: (sender as AnyObject).bounds, trackRect: trackRect, value: (sender as AnyObject).value)
+        self.thresholdLabel.center = CGPoint(x: thumbRect.midX + 35, y: self.thresholdLabel.center.y)    }
     
     @IBAction func activeMonitoring(_ sender: Any) {
         
         if activateSwitch.isOn {
             centralManager = CBCentralManager(delegate: self, queue: nil)
-            activityIcon.isHidden = false
-            activityIcon.startAnimating()
         } else {
             centralManager.stopScan()
-            activityIcon.stopAnimating()
-            activityIcon.isHidden = true
             initiate()
         }
     }
     
-    @IBAction func infoTouched(_ sender: Any) {
+    @IBAction func infoButton(_ sender: UITapGestureRecognizer) {
         let alert = UIAlertController(title: "About", message: about, preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "Close", style: .default) { (action) -> Void in }
         alert.addAction(closeAction)
@@ -223,22 +233,22 @@ extension ViewController: CBCentralManagerDelegate {
         
         if (dist <= getDistance()) {
             people += 1
-            setCounter(value: people)
+            setCounter()
             
         } else {
             people -= 1
             if people < 0 {
                 people = 0
             }
-            setCounter(value: people)
+            setCounter()
         }
         
         if (people >= getThreshold()) {
-            setStatus(value: "Unsafe!")
+            setStatus(value: "CAUTION")
             vibrate()
             //sleep(2)
         } else {
-            setStatus(value: "Safe")
+            setStatus(value: "SAFE")
         }
         
     }
